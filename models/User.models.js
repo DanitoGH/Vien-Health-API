@@ -30,7 +30,9 @@ userScheme.pre('save', async function (next) {
       next(error)
     }
 })
-
+/**
+ * Validate user password
+ */
 userScheme.methods.isValidPassword = async function (password) {
     try {
        return await bcrypt.compare(password, this.password)
