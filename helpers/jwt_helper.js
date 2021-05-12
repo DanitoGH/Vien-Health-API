@@ -13,10 +13,7 @@ module.exports = {
                 audience: userId,
             }
             JWT.sign(payload, secret, options, (err, token) => {
-                if(err) {
-                    console.log(err.message)
-                    return reject(createError.InternalServerError())
-                }
+                if(err) return reject(createError.InternalServerError())
                 resolve(token)
             })
         })
@@ -34,7 +31,6 @@ module.exports = {
                 if(err) {
                     return reject(createError.InternalServerError())
                 }
-
                 client.SET(userId, token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
                   if(err) {
                     reject(createError.InternalServerError())
@@ -62,5 +58,14 @@ module.exports = {
              
          })
        })
-    }
+    },
+    extractHeaderToken: (authHeader) => {
+        return new Promise((resolve, reject) =>{
+            if (!authHeader.startsWith("Bearer ")){
+                reject(createError.Unauthorized())
+                return
+            }
+            return resolve(authHeader.substring(7, authHeader.length))
+        })
+     }
 }
