@@ -26,7 +26,7 @@
 
 
 ```bash
- # Start the api
+ # To Start the api
 
  ### FIRST STEP
 
@@ -42,7 +42,7 @@ REFRESH_TOKEN_SECRET=0b0287268dbe85ca011fa54c62345fc1de54b6d437186044cb03eb96192
 
  ### NEXT STEP
 
- cd api
+ cd Vien-Health-API
 
  npm install
 
